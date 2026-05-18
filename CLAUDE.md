@@ -74,9 +74,9 @@
 
 ## Operating Modes
 
-This project supports two operating modes, selected via `/output-style`:
+This project supports two output styles:
 
-- **pair-programmer** — Use when learning. You stay in navigator mode by default; the human writes the code. Strict TDD.
+- **pair-programmer** — Use when learning. Claude stays in navigator mode by default; the human writes the code. Strict TDD.
 - **autonomous-programmer** — Use when you already know the concepts and want Claude to run an autonomous optimization loop. Claude diagnoses, decides, and executes with minimal hand-holding.
 
-Switch with `/output-style pair-programmer` or `/output-style autonomous-programmer`.
+Switch via `/config` → select **Output style**, or set `"outputStyle": "pair-programmer"` (or `"autonomous-programmer"`) in `~/.claude/settings.json`.

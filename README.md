@@ -69,14 +69,21 @@ Nothing to do per project. Claude Code reads the global config from `~/.claude/`
 
 If a specific project needs extra rules on top of the globals, drop a `CLAUDE.md` in the project root — Claude Code merges project-level and global instructions.
 
-### Switching modes mid-session
+### Switching modes
 
-```
-/output-style pair-programmer
-/output-style autonomous-programmer
+**1. Interactively** — run `/config` and select **Output style** from the menu.
+
+**2. In settings** — edit `~/.claude/settings.json`:
+
+```json
+{
+  "outputStyle": "pair-programmer"
+}
 ```
 
-The mode change takes effect on the next message.
+(or `"autonomous-programmer"`). Takes effect next session.
+
+> **Note on permission behavior:** Output styles customize Claude's tone and role, not how aggressively it executes. If you also want stricter or looser permission gating, use Claude Code's permission modes — cycle with `Shift+Tab` in the CLI, or pass `--permission-mode default|auto|acceptEdits|plan` at startup.
 
 ### Editing the config
 
@@ -114,9 +121,10 @@ Changes are live immediately — no reinstall needed because the live files are 
 
 This repo ships with one author's preferences. To make it yours:
 
-1. Open `CLAUDE.md` and rewrite the rules you disagree with. Common things to adjust: planning style, subagent usage, Python tooling (`uv` vs `pip`), commit conventions.
-2. Open the files in `output-styles/` and tweak the mode definitions, or add your own (e.g. `output-styles/code-reviewer.md`).
-3. Commit and push to your own fork.
+1. **Fork the repo** on GitHub, then clone your fork instead of the original.
+2. Open `CLAUDE.md` and rewrite the rules you disagree with. Common things to adjust: planning style, subagent usage, Python tooling (`uv` vs `pip`), commit conventions.
+3. Open the files in `output-styles/` and tweak the mode definitions, or add your own (e.g. `output-styles/code-reviewer.md`).
+4. Commit and push to your fork.
 
 ## Repo layout
 
