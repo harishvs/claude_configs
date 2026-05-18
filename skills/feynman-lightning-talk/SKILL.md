@@ -1,6 +1,6 @@
 ---
 name: feynman-lightning-talk
-description: Produce a jargon-free Feynman-style lightning talk (~10 slides, 10–15 min) on a complex ML/GPU/infrastructure topic. Use when the user asks to "create a lightning talk on X", "explain X in slides", "make a Feynman-style explainer for X", or asks to evaluate/simplify an existing technical talk. Audience defaults to semi-technical (Solutions Architects, TAMs, sales engineers) unless otherwise specified.
+description: Produce a jargon-free Feynman-style explainer for a complex ML/GPU/infrastructure topic. Can deliver a 10-slide lightning talk outline, a prose one-pager that explains the same concept in full sentences, or both. Always asks the user up front which one they want before generating. Use when the user asks to "create a lightning talk on X", "explain X in slides", "make a Feynman-style explainer for X", "write a one-pager on X", or asks to evaluate/simplify an existing technical talk. Audience defaults to semi-technical (Solutions Architects, TAMs, sales engineers) unless otherwise specified.
 ---
 
 # Feynman Lightning Talk
@@ -22,6 +22,21 @@ Follow the Feynman Technique: if you can't explain it simply, you don't understa
 
 ## Process
 
+### 0. Ask What They Want
+
+**Before doing any research or writing**, ask the user which output(s) they want:
+
+> "Quick check before I dig in — would you like:
+> 1. **Slide outline** (~10 slides, speaker notes, jargon checks)
+> 2. **One-pager** (`one-pager.md`, full prose, written to disk)
+> 3. **Both**
+>
+> And: any audience to assume other than the default (Solutions Architects, TAMs, sales engineers)?"
+
+Wait for the answer. If the user already specified in their initial request (e.g. "write me a one-pager on Flash Attention"), skip the question and confirm in one line: "Going with one-pager only. Default audience unless you tell me otherwise."
+
+Only generate the artifacts the user asked for. The Process steps below describe both — apply only the relevant ones.
+
 ### 1. Understand It
 
 - What problem does this solve?
@@ -38,7 +53,7 @@ Follow the Feynman Technique: if you can't explain it simply, you don't understa
 - **The Payoff** — What this enables (concrete results)
 - **The Stack** — How it connects to things they already know
 
-### 3. Create the Slide Outline (~10 slides)
+### 3. Create the Slide Outline (~10 slides) — *only if the user asked for slides*
 
 | Slide | Purpose |
 |-------|---------|
@@ -58,7 +73,58 @@ For each slide provide:
 - Speaker notes (conversational, as you'd actually talk)
 - Jargon check (every term must be defined on this or a prior slide)
 
-### 4. Self-Evaluate (The Feynman Test)
+### 4. Write the One-Pager (`one-pager.md`) — *only if the user asked for the one-pager*
+
+Slides are hard to read after the fact — bullet points lose the connective tissue between ideas. The one-pager explains the same concept in **full sentences**, following the same structure as the slides so a reader can map slide → paragraph (or read the one-pager standalone if there are no slides).
+
+**Where to write it:** in the current working directory, as `lightning-talk-<slug>/one-pager.md` (e.g. `lightning-talk-flash-attention/one-pager.md`). Create the directory if it doesn't exist. Use the Write tool — don't just print it inline.
+
+**Structure** (one short section per slide, 2–4 sentences each, prose not bullets):
+
+```markdown
+# <Topic>: A Feynman-Style Explainer
+
+> One-sentence core insight, no jargon.
+
+## The Hook
+<Why the reader should care. The pain they recognize. 2–3 sentences.>
+
+## The Problem (Before This Existed)
+<What people did before, and why it was insufficient. 2–4 sentences.>
+
+## The Core Insight
+<The one idea, expanded into 2–3 sentences. Still no jargon.>
+
+## The Analogy
+<The real-world mental model, fully described. 3–5 sentences.>
+
+## How It Works
+### <Mechanism step 1>
+<2–4 sentences in plain prose. Use only terms introduced earlier.>
+
+### <Mechanism step 2>
+<...>
+
+### <Mechanism step 3>
+<...>
+
+## The Diagram
+<Describe in prose what the original diagram shows and why it makes the mechanism clear. 3–5 sentences. The reader should be able to picture it without seeing it.>
+
+## The Payoff
+<Concrete results — speed, memory, capability. 2–4 sentences.>
+
+## Remember This One Thing
+<The single sentence the reader should walk away with. Same as the core insight, restated for emphasis.>
+
+---
+
+*Companion to the lightning talk slides. Read this first if you missed the talk, or read it after to lock the concept in.*
+```
+
+If both artifacts are being produced, they must agree: every slide has a corresponding section in the one-pager, and every term defined in the one-pager is defined the same way in the slides.
+
+### 5. Self-Evaluate (The Feynman Test)
 
 Score your own output 1–5 on:
 - **Memorability** — Will they remember the core idea tomorrow?
@@ -75,7 +141,10 @@ Unless told otherwise, assume: Solutions Architects, TAMs, sales engineers — s
 
 ## Modes
 
-- **"explain [topic]"** or **"create a lightning talk on [topic]"** — Full creation mode. Research → Explain → Outline → Evaluate.
+- **"explain [topic]"** or **"create a lightning talk on [topic]"** — Ambiguous about format → ask the user (slides / one-pager / both) before producing anything.
+- **"slide outline for [topic]"** or **"slides on [topic]"** — Skip the question. Produce slides only.
+- **"one-pager on [topic]"** or **"write up [topic]"** — Skip the question. Produce the one-pager only.
+- **"both for [topic]"** — Skip the question. Produce slides + one-pager.
 - **"evaluate this talk"** + [user's draft] — Critique mode. Score against the Feynman Test, provide specific rewrite suggestions per slide.
 - **"simplify this"** + [jargon-heavy text] — Rewrite in plain language with analogies.
 

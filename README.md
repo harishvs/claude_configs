@@ -23,7 +23,7 @@ If you set these up by hand on each machine, they drift. This repo keeps them in
 | `CLAUDE.md` | Global instructions for Claude — planning rules, subagent strategy, verification expectations, Python/uv preference, memory hygiene, commit conventions. |
 | `output-styles/pair-programmer.md` | "Pair programming" mode. Claude acts as the navigator; you write the code. Strict TDD. Use this when learning a new area. |
 | `output-styles/autonomous-programmer.md` | "Autonomous" mode. Claude diagnoses, decides, and executes with minimal hand-holding. Use this when you already know the concepts and just want the work done. |
-| `skills/feynman-lightning-talk/SKILL.md` | Auto-triggered skill. Produces a jargon-free, Feynman-style 10-slide lightning talk on complex ML/GPU/infra topics. |
+| `skills/feynman-lightning-talk/SKILL.md` | Auto-triggered skill for jargon-free, Feynman-style explainers of complex ML/GPU/infra topics. Asks up front whether you want a 10-slide lightning talk outline, a prose `one-pager.md` (written to disk, full sentences for readers who can't sit through the talk), or both. |
 | `install.sh` | Sets up the symlinks on a new machine. Safe to re-run. |
 
 ## Prerequisites
