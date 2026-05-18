@@ -4,10 +4,11 @@ A portable, git-tracked configuration for [Claude Code](https://docs.claude.com/
 
 ## What this project is
 
-Claude Code reads two kinds of configuration from your home directory:
+Claude Code reads three kinds of configuration from your home directory:
 
 1. **Global instructions** — `~/.claude/CLAUDE.md`. A markdown file Claude reads at the start of every session, on every project. Things like "always use a virtualenv for Python", "plan before coding", "don't add Co-Authored-By to commits".
 2. **Output styles** — `~/.claude/output-styles/*.md`. Named "modes" you can switch between with `/output-style <name>`. Each mode tells Claude how to collaborate with you (e.g. pair-programmer, autonomous-programmer).
+3. **Skills** — `~/.claude/skills/<name>/SKILL.md`. Reusable, auto-triggered prompts. Claude reads each skill's frontmatter `description` and invokes it when the conversation matches.
 
 If you set these up by hand on each machine, they drift. This repo keeps them in one place. The files in `~/.claude/` become **symlinks** into the repo, so:
 
@@ -22,6 +23,7 @@ If you set these up by hand on each machine, they drift. This repo keeps them in
 | `CLAUDE.md` | Global instructions for Claude — planning rules, subagent strategy, verification expectations, Python/uv preference, memory hygiene, commit conventions. |
 | `output-styles/pair-programmer.md` | "Pair programming" mode. Claude acts as the navigator; you write the code. Strict TDD. Use this when learning a new area. |
 | `output-styles/autonomous-programmer.md` | "Autonomous" mode. Claude diagnoses, decides, and executes with minimal hand-holding. Use this when you already know the concepts and just want the work done. |
+| `skills/feynman-lightning-talk/SKILL.md` | Auto-triggered skill. Produces a jargon-free, Feynman-style 10-slide lightning talk on complex ML/GPU/infra topics. |
 | `install.sh` | Sets up the symlinks on a new machine. Safe to re-run. |
 
 ## Prerequisites
@@ -45,10 +47,13 @@ That's it. Open a new shell, `cd` into any project, run `claude`, and the global
 It creates these symlinks:
 
 ```
-~/.claude/CLAUDE.md                            -> ~/claude_configs/CLAUDE.md
-~/.claude/output-styles/pair-programmer.md     -> ~/claude_configs/output-styles/pair-programmer.md
+~/.claude/CLAUDE.md                              -> ~/claude_configs/CLAUDE.md
+~/.claude/output-styles/pair-programmer.md       -> ~/claude_configs/output-styles/pair-programmer.md
 ~/.claude/output-styles/autonomous-programmer.md -> ~/claude_configs/output-styles/autonomous-programmer.md
+~/.claude/skills/feynman-lightning-talk          -> ~/claude_configs/skills/feynman-lightning-talk
 ```
+
+The script auto-discovers any directory under `skills/` in the repo, so adding a new skill is just `mkdir skills/<name>/ && touch skills/<name>/SKILL.md` and re-running `./install.sh`.
 
 If any of those paths already exist as real files, the script backs them up first with a `.bak.<timestamp>` suffix — your old config is preserved, not overwritten.
 
@@ -134,6 +139,9 @@ This repo ships with one author's preferences. To make it yours:
 ├── output-styles/
 │   ├── autonomous-programmer.md
 │   └── pair-programmer.md
+├── skills/
+│   └── feynman-lightning-talk/
+│       └── SKILL.md
 ├── install.sh                         # one-shot symlink installer
 ├── .gitignore
 └── README.md
@@ -160,6 +168,7 @@ Delete the symlinks and (optionally) restore your `.bak.*` files:
 rm ~/.claude/CLAUDE.md
 rm ~/.claude/output-styles/pair-programmer.md
 rm ~/.claude/output-styles/autonomous-programmer.md
+rm ~/.claude/skills/feynman-lightning-talk
 # then if you have backups:
 # mv ~/.claude/CLAUDE.md.bak.<timestamp> ~/.claude/CLAUDE.md
 ```
