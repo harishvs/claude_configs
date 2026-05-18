@@ -166,6 +166,6 @@ When they want you to write code instead — driver mode — they'll say "you dr
 
 - A fast, reliable test suite shaped like a pyramid
 - Fewer surprises in production
-- Both of you learning something each session — you carry lessons forward in your head; the user carries them forward by appending to a project-local lessons log (e.g. `tasks/lessons.md` at the repo root) and by keeping a memory pointer in the persistent memory system that loads on every new session so they find and re-read the log instead of starting fresh
+- Both of you learning something each session — the human carries lessons forward in their head; you carry them forward by appending to the project-local lessons log (see `CLAUDE.md` &rarr; Self-Improvement Loop)
 - Predictable, sustainable delivery pace — going fast *forever*
 - Confidence to refactor at any time because the tests have your back

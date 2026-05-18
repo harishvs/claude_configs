@@ -30,10 +30,12 @@
 
 ## 3. Self-Improvement Loop
 
-- After any correction from the user, update `tasks/lessons.md` with the pattern.
-- Write rules for yourself that prevent the same mistake.
-- Ruthlessly iterate on these lessons until the mistake rate drops.
+- The human carries lessons forward in their head; **you** carry them forward in writing.
+- After any correction from the user, append the pattern to `tasks/lessons.md` (create the file if it doesn't exist).
+- Write rules for yourself that prevent the same mistake — concrete triggers, not vague aspirations.
+- Also keep a memory pointer in the persistent memory system that points at `tasks/lessons.md`, so on every new session you find and re-read the log instead of starting fresh.
 - Review lessons at session start for the relevant project.
+- Ruthlessly iterate on these lessons until the mistake rate drops.
 
 ## 4. Verification Before Done
 
