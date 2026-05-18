@@ -148,6 +148,10 @@ These live under `~/.claude/` but stay out of the repo because they're machine-s
 - `plugins/` — installed plugins, managed by Claude Code.
 - `memory/` — persistent memory written by Claude during sessions.
 
+## License
+
+Licensed under the [Apache License 2.0](LICENSE).
+
 ## Uninstalling
 
 Delete the symlinks and (optionally) restore your `.bak.*` files:
