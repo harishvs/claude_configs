@@ -88,6 +88,15 @@ Slides are hard to read after the fact — bullet points lose the connective tis
 
 **Where to write it:** in the current working directory, as `lightning-talk-<slug>/one-pager.md` (e.g. `lightning-talk-flash-attention/one-pager.md`). Create the directory if it doesn't exist. Use the Write tool — don't just print it inline.
 
+**Generate the diagram as a real PNG.** Alongside `one-pager.md`, produce `diagram.png` in the same directory. The one-pager references it via `![Diagram](diagram.png)` so the reader actually sees the visual.
+
+How to produce it:
+- Write a small Python script (`make_diagram.py`) in the same directory and run it with `uv run --with matplotlib python make_diagram.py` (or `--with matplotlib --with numpy` if needed). matplotlib is the default — it's universally available, renders clean PNGs, and handles boxes/arrows/labels via `patches.FancyBboxPatch` and `annotate`. Use graphviz only if the diagram is genuinely a graph (nodes + edges with auto-layout).
+- The diagram must be **original** — invent the visual from the mechanism, don't reproduce a figure from a paper.
+- Keep it readable: ~1200×800 px, large fonts (14pt+), high contrast, minimal chrome. One idea per diagram, same as one idea per slide.
+- Save with `plt.savefig('diagram.png', dpi=150, bbox_inches='tight')`.
+- After running the script, verify the PNG exists and is non-empty before declaring the one-pager done.
+
 **Structure** (one short section per slide, 2–4 sentences each, prose not bullets):
 
 ```markdown
@@ -118,7 +127,10 @@ Slides are hard to read after the fact — bullet points lose the connective tis
 <...>
 
 ## The Diagram
-<Describe in prose what the original diagram shows and why it makes the mechanism clear. 3–5 sentences. The reader should be able to picture it without seeing it.>
+
+![Diagram](diagram.png)
+
+<2–3 sentences of caption: what the diagram shows and why it makes the mechanism click. The image carries the visual; the caption tells the reader where to look first.>
 
 ## The Payoff
 <Concrete results — speed, memory, capability. 2–4 sentences.>
