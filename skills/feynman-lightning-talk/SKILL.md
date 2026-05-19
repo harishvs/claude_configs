@@ -46,6 +46,8 @@ Wait for the answer. If the user already specified in their initial request (e.g
 
 Only generate the artifacts the user asked for. The Process steps below describe both — apply only the relevant ones.
 
+If the user picks one-pager only, treat it as the complete artifact — don't draft slides internally first. Go straight from the Feynman explanation (step 2) to the one-pager (step 4), skipping step 3 entirely.
+
 ### 1. Understand It
 
 - What problem does this solve?
@@ -84,7 +86,7 @@ For each slide provide:
 
 ### 4. Write the One-Pager (`one-pager.md`) — *only if the user asked for the one-pager*
 
-Slides are hard to read after the fact — bullet points lose the connective tissue between ideas. The one-pager explains the same concept in **full sentences**, following the same structure as the slides so a reader can map slide → paragraph (or read the one-pager standalone if there are no slides).
+The one-pager is a standalone explainer in full prose — readable cold, without slides ever existing. It follows the Feynman structure (hook → problem → insight → analogy → mechanism → diagram → payoff → memorable line).
 
 **Where to write it:** in the current working directory, as `lightning-talk-<slug>/one-pager.md` (e.g. `lightning-talk-flash-attention/one-pager.md`). Create the directory if it doesn't exist. Use the Write tool — don't just print it inline.
 
@@ -97,7 +99,7 @@ How to produce it:
 - Save with `plt.savefig('diagram.png', dpi=150, bbox_inches='tight')`.
 - After running the script, verify the PNG exists and is non-empty before declaring the one-pager done.
 
-**Structure** (one short section per slide, 2–4 sentences each, prose not bullets):
+**Structure** (one short section per Feynman beat, 2–4 sentences each, prose not bullets):
 
 ```markdown
 # <Topic>: A Feynman-Style Explainer
@@ -140,7 +142,7 @@ How to produce it:
 
 ---
 
-*Companion to the lightning talk slides. Read this first if you missed the talk, or read it after to lock the concept in.*
+*If slides exist for this topic, this one-pager mirrors them section-for-section. Otherwise, read top-to-bottom — it's self-contained.*
 ```
 
 If both artifacts are being produced, they must agree: every slide has a corresponding section in the one-pager, and every term defined in the one-pager is defined the same way in the slides.
@@ -169,7 +171,7 @@ The plain-language explanation has to land for the primary readers without help.
 
 - **"explain [topic]"** or **"create a lightning talk on [topic]"** — Ambiguous about format → ask the user (slides / one-pager / both) before producing anything.
 - **"slide outline for [topic]"** or **"slides on [topic]"** — Skip the question. Produce slides only.
-- **"one-pager on [topic]"** or **"write up [topic]"** — Skip the question. Produce the one-pager only.
+- **"one-pager on [topic]"** or **"write up [topic]"** — Skip the question. Produce the one-pager only. Do not generate slides as scaffolding — go directly from the Feynman explanation to the prose artifact.
 - **"both for [topic]"** — Skip the question. Produce slides + one-pager.
 - **"evaluate this talk"** + [user's draft] — Critique mode. Score against the Feynman Test, provide specific rewrite suggestions per slide.
 - **"simplify this"** + [jargon-heavy text] — Rewrite in plain language with analogies.
